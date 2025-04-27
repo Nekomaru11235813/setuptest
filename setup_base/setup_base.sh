@@ -27,12 +27,13 @@ cd "${PROJECTS_DIR}/${ProjectName}" || exit 1
 npm init -y --init-author-name "${AuthorName}"
 
 # TypeScriptのインストール
-npm install --save-dev typescript @types/node ts-node 
-
+npm install --save-dev typescript @types/node ts-node
+npm install --save-dev jest ts-jest @types/jest 
 
 # ディレクトリの作成
 mkdir -p src dist 
 mkdir -p memo
+mkdir -p .vscode
 
 # 初期ファイルの作成
 touch src/index.ts src/index.test.ts 
@@ -99,7 +100,7 @@ memo/
 # configファイルの作成
 cp "${SCRIPT_DIR}/tsconfig.template.json" tsconfig.json -f
 cp "${SCRIPT_DIR}/jest.config.template.cjs" jest.config.cjs -f
-cp "${SCRIPT_DIR}/prettierrc" .prettierrc -f
+cp "${SCRIPT_DIR}/.prettierrc" .prettierrc -f
 cp "${SCRIPT_DIR}/eslint.config.js" eslint.config.js -f
 
 # linter, formatter, huskyのインストール
@@ -110,20 +111,21 @@ npm install --save-dev husky lint-staged
 # package.jsonの修正
 jq '.scripts = {
   "start" : "node dist/index.js",
-  "build" : "tsc --watch",
-  "start:ts ": "ts-node src/index.ts",
+  "build" : "tsc",
+  "start:ts": "ts-node src/index.ts",
   "test" : "jest",
   "lint" : "eslint src/**/*.ts",
   "lint:fix" : "eslint src/**/*.ts --fix && prettier --write src/**/*.ts"
 }
+| .type = "module"
 | .husky = {
   "hooks": {
     "pre-commit": "lint-staged"
   }
 }
-| .lint-staged = {
+| .["lint-staged"] = {
   "src/**/*.ts": [
-    "npm run lint:fix
+    "npm run lint:fix"
   ]
 }' package.json > temp.json && mv temp.json package.json
 
@@ -145,7 +147,7 @@ git checkout -b feature
 
 code .
 
-cde "${PROJECTS_DIR}"
+cd "${PROJECTS_DIR}"
 
 
 
