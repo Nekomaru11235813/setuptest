@@ -15,7 +15,7 @@ TypeScriptプロジェクトを簡単に初期化するスクリプトです。
 ## セットアップ手順
 
 ```bash
-bash setup_base/setup_base.sh <プロジェクト名>d
+bash setup_base/setup_base.sh <プロジェクト名>
 ```
 プロジェクト名を省略すると my_project が作成されます。
 
