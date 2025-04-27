@@ -58,7 +58,6 @@ printf '{
   "editor.semanticHighlighting.enabled": true,
    "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -81,7 +80,7 @@ printf '{
     "editor.tabSize": 2,
     "editor.formatOnSave": true
   },
-  "files.eol": "\n",
+  "files.eol": "\\n",
    "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
