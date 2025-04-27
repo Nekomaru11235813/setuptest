@@ -116,17 +116,14 @@ jq '.scripts = {
   "lint" : "eslint src/**/*.ts",
   "lint:fix" : "eslint src/**/*.ts --fix && prettier --write src/**/*.ts"
 }
-| .type = "module"
-| .husky = {
-  "hooks": {
-    "pre-commit": "lint-staged"
-  }
-}
 | .["lint-staged"] = {
-  "src/**/*.ts": [
-    "npm run lint:fix"
+    "src/**/*.{ts,tsx}": [
+    "eslint --fix",
+    "prettier --write"
   ]
-}' package.json > temp.json && mv temp.json package.json
+}
+| .type = "module"
+' package.json > temp.json && mv temp.json package.json
 
 # linter, formatterの実行
 npm run lint:fix
@@ -138,6 +135,14 @@ npm run test
 
 # gitの初期化
 git init
+
+# huskyの初期化
+npx husky init
+
+# pre-commitフック作成
+echo  "npx lint-staged" > .husky/pre-commit
+
+# 資産の追加/コミット
 git add .
 git commit -m "init"
 git branch -M main
