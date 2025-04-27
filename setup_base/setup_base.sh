@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # requirements
-# lsb_release : 22.04.5 LTS
-# bash --version : 5.1.16(1)-release
+# lsb_release -a : Ubuntu 22.04.5 LTS
+# bash --version : GNU bash, version 5.1.16(1)-release (x86_64-pc-linux-gnu)
 # node --version : v20.18.0
-# git --version : 2.34.1
-# jq --version : 1.6
+# git --version : git version 2.34.1
+# jq --version : jq-1.6
 
 set -euo pipefail
 IFS=$'\n\t'
